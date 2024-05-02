@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sviluppatore</title>
+	</head>
+<body>
+	<div th:if="${developer}">
+		<h1 th:text="${developer.nameCompany}"></h1>
+	</div>
+	<div>
+		<span><img width="30%" th:src=${developer.logo} /></span>
+	</div>
+	<div th:unless="${developer}">Non esiste</div>
+</body>
+</html>

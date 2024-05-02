@@ -1,0 +1,4 @@
+insert into developer (id, name_company, logo) values(nextval('developer_seq'), 'NaughtyDog', 'https://sm.ign.com/t/ign_it/screenshot/default/naughty-dog_7m3y.1280.jpg');
+insert into developer (id, name_company, logo) values(nextval('developer_seq'), 'SEGA', 'https://sm.ign.com/t/ign_it/screenshot/default/sega-sonic-logo_b6eu.1280.jpg');
+
+insert into videogame (id, title, genre, year, budget, platforms, url_image, developer_id) values(nextval('videogame_seq'), 'Sonic Adventure', 'Platform', '1998', 'triplaA', '{Xbox;PC;Playstation}','https://upload.wikimedia.org/wikipedia/en/6/60/Sonic_Adventure.PNG', '51');

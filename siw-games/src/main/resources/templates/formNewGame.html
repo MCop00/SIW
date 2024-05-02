@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nuovo Gioco</title>
+	</head>
+<body>
+	<div>
+		<a href="/indexGame"><img src="/images/logo-games.jpeg" width="30%"/></a>
+	</div>
+	<h1>Aggiungi un Videogioco nel sistema</h1>
+	<form th:action="@{/games}" method="POST" th:object="${game}">
+		<div>
+			<span th:text="${messaggioErrore}"></span>
+		</div>
+		<fieldset>
+			<legend>Campi del videogioco:</legend>
+		<div>Titolo:
+			<span><input required type="text" th:field="${game.title}"/></span>
+		</div>
+		<div>Anno d'uscita:
+			<span><input required type="text" th:field="${game.year}"/></span>
+		</div>
+		<div>Genere:
+			<input type="radio" th:field="${game.genre}" value="Platform"><span>Platform</span>
+			<input type="radio" th:field="${game.genre}" value="Avventura"><span>Adventure</span>
+			<input type="radio" th:field="${game.genre}" value="Azione"><span>Action</span>
+			<input type="radio" th:field="${game.genre}" value="Ruolistico"><span>Role-Playing</span>
+			<input type="radio" th:field="${game.genre}" value="Shooter"><span>Shooter</span>
+		</div>
+		<div>Budget:
+			<select th:field="${game.budget}">
+				<option value="">Seleziona</option>
+				<option value="Indie">Indie</option>
+				<option value="DoppiaA">AA</option>
+				<option value="TriplaA">AAA</option>
+			</select>
+		</div>
+		<div>Sviluppatore:
+			<input list="sviluppatori">
+			<datalist th:field="${game.developer}">
+			
+			</datalist>
+		</div>
+		<div>Piattaforme:
+			<select th:field=${game.platforms} multiple>
+			<option value="">Seleziona</option>
+			<option value="PC">PC</option>
+			<option value="Xbox">Xbox</option>
+			<option value="PlayStation">PlayStation</option>
+			<option value="Nintendo">Nintendo</option>
+			</select>
+		</div>
+		<div>URL immagine: 
+			<span><input type="url" th:field="${game.urlImage}"/></span>
+		</div>
+		<div>
+			<button type="submit">Conferma</button>
+			<button type="reset">Cancella</button>
+		</div>
+		</fieldset>
+	</form>
+</body>
+</html>

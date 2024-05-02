@@ -1,0 +1,72 @@
+package it.uniroma3.siw.model;
+
+import java.util.List;
+import java.util.Objects;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+
+@Entity
+public class Award {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	private String type;
+	private Integer year;
+	
+	@ManyToOne
+	private Videogame winner;
+	@ManyToMany
+	private List<Videogame> nominations;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public Integer getYear() {
+		return year;
+	}
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+	public Videogame getWinner() {
+		return winner;
+	}
+	public void setWinner(Videogame winner) {
+		this.winner = winner;
+	}
+	public List<Videogame> getNominations() {
+		return nominations;
+	}
+	public void setNominations(List<Videogame> nominations) {
+		this.nominations = nominations;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(type, year);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Award other = (Award) obj;
+		return Objects.equals(type, other.type) && Objects.equals(year, other.year);
+	}
+}
