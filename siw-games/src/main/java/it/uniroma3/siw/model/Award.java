@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,7 +22,7 @@ public class Award {
 	
 	@ManyToOne
 	private Videogame winner;
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Videogame> nominations;
 	
 	public Long getId() {

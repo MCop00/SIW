@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Max;
@@ -27,10 +29,13 @@ public class Videogame {
 	private String budget;
 	private String urlImage;
 	private List<String> platforms;
+	private Float vote;
 	
 	@OneToMany(mappedBy = "winner")
 	private List<Award> awardsWon;
-	@ManyToOne(cascade = {CascadeType.PERSIST})
+	
+	@ManyToOne
+	@JoinColumn(name="developer_id")
 	private Developer developer;
 	@OneToMany(mappedBy="videogame")
 	private List<Review> reviews;
@@ -76,6 +81,12 @@ public class Videogame {
 	}
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
+	}
+	public Float getVote() {
+		return vote;
+	}
+	public void setVote(Float vote) {
+		this.vote = vote;
 	}
 	public List<Award> getAwardsWon() {
 		return awardsWon;

@@ -2,6 +2,21 @@
 <html>
 	<head>
 		<title>Nuovo Gioco</title>
+      <script>
+        function mostraImmagine() {
+            var select = document.getElementById("platforms");
+            var selectedOptions = Array.from(select.selectedOptions);
+            var container = document.getElementById("imageContainer");
+            container.innerHTML = ""; // Pulisci il contenitore
+
+            selectedOptions.forEach(function(option) {
+                var img = document.createElement("img");
+                img.src = "/images/" + option.value + ".jpg"; // Immagine associata all'opzione
+                img.alt = option.value;
+                container.appendChild(img);
+            });
+        }
+      </script>
 	</head>
 <body>
 	<div>
@@ -22,10 +37,10 @@
 		</div>
 		<div>Genere:
 			<input type="radio" th:field="${game.genre}" value="Platform"><span>Platform</span>
-			<input type="radio" th:field="${game.genre}" value="Avventura"><span>Adventure</span>
-			<input type="radio" th:field="${game.genre}" value="Azione"><span>Action</span>
-			<input type="radio" th:field="${game.genre}" value="Ruolistico"><span>Role-Playing</span>
-			<input type="radio" th:field="${game.genre}" value="Shooter"><span>Shooter</span>
+			<input type="radio" th:field="${game.genre}" value="Adventure"><span>Avventura</span>
+			<input type="radio" th:field="${game.genre}" value="Action"><span>Azione</span>
+			<input type="radio" th:field="${game.genre}" value="Role-Playing"><span>Ruolistico</span>
+			<input type="radio" th:field="${game.genre}" value="Shooter"><span>Sparatutto</span>
 		</div>
 		<div>Budget:
 			<select th:field="${game.budget}">
@@ -36,20 +51,23 @@
 			</select>
 		</div>
 		<div>Sviluppatore:
-			<input list="sviluppatori">
-			<datalist th:field="${game.developer}">
-			
-			</datalist>
+			<ul>
+				<li th:each="sviluppatore : ${developers}"><a>
+					<input type="radio" th:field="${game.developer}" th:value="${sviluppatore.id}" th:text="${sviluppatore.nameCompany}">
+				</a>
+				</li>
+			</ul>
 		</div>
-		<div>Piattaforme:
-			<select th:field=${game.platforms} multiple>
-			<option value="">Seleziona</option>
-			<option value="PC">PC</option>
-			<option value="Xbox">Xbox</option>
-			<option value="PlayStation">PlayStation</option>
-			<option value="Nintendo">Nintendo</option>
-			</select>
-		</div>
+        <div>Piattaforme:
+        <select id="platforms" th:field="${game.platforms}" multiple onchange="mostraImmagine()">
+            <option value="">Seleziona</option>
+            <option value="PC">PC</option>
+            <option value="Xbox">Xbox</option>
+            <option value="PlayStation">PlayStation</option>
+            <option value="Nintendo">Nintendo</option>
+        </select>
+    </div>
+    <div id="imageContainer"></div>
 		<div>URL immagine: 
 			<span><input type="url" th:field="${game.urlImage}"/></span>
 		</div>

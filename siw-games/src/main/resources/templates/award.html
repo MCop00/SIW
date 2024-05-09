@@ -4,6 +4,9 @@
 		<title>Premio</title>
 	</head>
 <body>
+	<div>
+		<a href="/indexAward"><img src="/images/logo-games.jpeg" width="30%"/></a>
+	</div>
 	<div th:if="${award}">
 		<h1 th:text="'Miglior gioco ' + ${award.type} + ' del ' + ${award.year}"></h1>
 		<div>Vincitore: 

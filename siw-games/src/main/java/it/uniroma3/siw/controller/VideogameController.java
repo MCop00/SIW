@@ -7,14 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.siw.model.Developer;
 import it.uniroma3.siw.model.Videogame;
+import it.uniroma3.siw.service.DeveloperService;
 import it.uniroma3.siw.service.VideogameService;
 
 @Controller
 public class VideogameController {
 	@Autowired VideogameService videogameService;
+	@Autowired DeveloperService developerService;
 	
 	@GetMapping("/indexGame")
 	public String indexGame() {
@@ -23,12 +25,16 @@ public class VideogameController {
 	@GetMapping("/formNewGame")
 	public String formNewGame(Model model) {
 		model.addAttribute("game", new Videogame());
+		model.addAttribute("developers", developerService.findAll());
 		return "formNewGame.html";
 	}
 	@PostMapping("/games")
-	public String newGame(@ModelAttribute("game") Videogame game, Model model) {
+	public String newGame(@ModelAttribute("game") Videogame game,Model model) {
 		if(!videogameService.existsByTitleAndYear(game.getTitle(), game.getYear())) {
+			
 			this.videogameService.save(game);
+			
+			
 			model.addAttribute("game", game);
 			return "game.html";
 		} else {
@@ -46,4 +52,5 @@ public class VideogameController {
 		model.addAttribute("games", this.videogameService.findAll());
 		return "games.html";
 	}
+	
 }

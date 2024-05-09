@@ -28,6 +28,7 @@ public class VideogameService {
 	public List<Videogame> findByYear(Integer year) {
 		return videogameRepository.findByYear(year);
 	}
-	
-
+	public Videogame[] findVideogamesByAwardTypeAndNotInAward(String awardType, Long awardId) {
+		return videogameRepository.findVideogamesByAwardTypeAndNotInAward(awardType, awardId);
+	}
 }

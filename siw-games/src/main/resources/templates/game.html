@@ -11,12 +11,16 @@
 		<h1 th:text="${game.title}">
 			<span th:text="' (' + ${game.year} + ')'"></span>
 		</h1>
-		<div>Genere: <span th:text="${game.genre}"></span></div>
+		<div>Genere: <span th:text = "${game.genre}"></span></div>
 		<div>Budget: <span th:text = "${game.budget}"></span></div>
 		<div>Piattaforme:
 			<span th:text="${game.platforms}"></span>
 		</div>
-		<div>Sviluppatore: <span th:text ="${game.developer.nameCompany}"></span></div>
+		<div>Sviluppatore:<span th:if="${game.developer}">
+							<span th:text ="${game.developer.nameCompany}"></span>
+						  </span>
+						  <span th:unless="${game.developer}">Non c'è sviluppatore</span>						
+		</div>		
 		<span><img width="30%" th:src=${game.urlImage} /></span>
 	</div>
 	<div th:unless="${game}">Non esiste</div>
