@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Update Award
+	</title>
+</head>
+<body>
+	<div><a href="/indexAward"><img src="/images/logo-games.jpeg" width="50%" /></a></div>
+	<h1>Aggiorna Premio</h1>
+	<div th:if="${award}">
+		<div>
+			<span th:text="${award.type}"></span>
+			<span th:text="' (' + ${award.year} + ')'"></span>
+		</div>
+		<div>
+			<span>Candidati: </span>
+			<div th:each="nomination: ${award.nominations}">
+				<span th:text="${nomination.title} + ' ' + ${nomination.year}"></span>
+			</div>
+			<a th:href="@{'/updateNominations/' + ${award.id} + '/' + ${award.type}}">
+				<button type="button">Modifica</button>
+			</a>
+		</div>
+	</div>
+	<div th:unless="${award}">Premio non esistente</div>
+</body>
+
+</html>

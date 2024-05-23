@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sviluppatori nel sistema</title>
+</head>
+<body>
+	<h1>Sviluppatori:</h1>
+	<div th:if="${developers.isEmpty()}">Non ci sono Sviluppatori nel sistema</div>
+	<ul>
+		<li th:each="developer : ${developers}">
+			<a th:href="@{'developer' + '/' + ${developer.id}}"
+				th:text="${developer.nameCompany}+ ' (' + ${game.year} + ')'"> 
+			</a>
+		</li>
+	</ul>
+</body>
+</html>
