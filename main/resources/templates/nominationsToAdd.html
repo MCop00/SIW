@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<div><a href="/indexAward"><img src="/images/logo-games.jpeg" width="50%"/></a></div>
+	<div><a href="/"><img src="/images/logo-games.jpeg" width="50%"/></a></div>
 	<h1 th:text="'Candidati al premio:  ' + ${award.type}"></h1>
 	<div th:if="${award.nominations.isEmpty()}">Non ci sono candidati per questo premio</div>
 	<ul>

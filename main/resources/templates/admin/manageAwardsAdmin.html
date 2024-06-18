@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Premi da gestire</title>
+	<title>Premi da gestire Admin</title>
 </head>
 
 <body>
@@ -12,7 +12,7 @@
 	<ul>
 		<li th:each="award : ${awards}">
 			<span th:text="'Miglior gioco ' + ${award.type} + ' (' + ${award.year} + ')'"></span>
-			<a th:href="@{'/formUpdateAward' + '/' + ${award.id} + '/' + ${award.type}}">Aggiorna premio</a>
+			<a th:href="@{'/admin/formUpdateAwardAdmin' + '/' + ${award.id} + '/' + ${award.type}}">Aggiorna premio</a>
 		</li>
 	</ul>
 </body>

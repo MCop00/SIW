@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Premio</title>
+	</head>
+<body>
+	<div>
+		<a href="/default/awards"><img src="/images/logo-games.jpeg" width="30%"/></a>
+	</div>
+	<div th:if="${award}">
+		<h1 th:text="'Miglior gioco ' + ${award.type} + ' del ' + ${award.year}"></h1>
+		<div>Vincitore: 
+			<span th:if="${award.winner}">
+				<span th:text="${award.winner.title} + ' ' + ${award.winner.year}"></span>
+			</span>
+			<span th:unless="${award.winner}">Da determinare</span>
+		</div>
+		<div>Candidature:
+			<span th:if="${award.nominations.isEmpty()}">Non ci sono candidature per questo premio</span>			
+			<ul>
+				<li th:each="game : ${award.nominations}">
+					<a th:href="'/default/' + @{'game' + '/' + ${game.id}}"
+						th:text="${game.title} + ' (' + ${game.year} + ')'"></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div th:unless="${award}">Non esiste</div>
+</body>
+</html>

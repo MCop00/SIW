@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.model.Developer;
 import it.uniroma3.siw.model.Videogame;
 import it.uniroma3.siw.repository.VideogameRepository;
 
@@ -28,7 +29,13 @@ public class VideogameService {
 	public List<Videogame> findByYear(Integer year) {
 		return videogameRepository.findByYear(year);
 	}
+	public List<Videogame> findByDeveloper(Developer developer) {
+		return videogameRepository.findByDeveloper(developer);
+	}
 	public Videogame[] findVideogamesByAwardTypeAndNotInAward(String awardType, Long awardId) {
 		return videogameRepository.findVideogamesByAwardTypeAndNotInAward(awardType, awardId);
+	}
+	public void deleteAllByDeveloper(Developer developer) {
+		videogameRepository.deleteAllByDeveloper(developer);
 	}
 }

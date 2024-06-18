@@ -10,35 +10,45 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.model.Developer;
 import it.uniroma3.siw.service.DeveloperService;
+import jakarta.transaction.Transactional;
 
 @Controller
 public class DeveloperController {
 	@Autowired DeveloperService developerService;
+	@Autowired VideogameController videogameController;
 	
-	@GetMapping("/formNewDeveloper")
+	@GetMapping("/admin/formNewDeveloper")
 	public String formNewDeveloper(Model model) {
 		model.addAttribute("developer", new Developer());
-		return "formNewDeveloper.html";
+		return "admin/formNewDeveloper.html";
 	}
-	@PostMapping("/developers")
+	@PostMapping("/admin/developers")
 	public String newDeveloper(@ModelAttribute("developer") Developer developer, Model model) {
 		if(!developerService.existsByNameCompany(developer.getNameCompany())) {
 			this.developerService.save(developer);
 			model.addAttribute("developer", developer);
-			return "developer.html";
+			return "admin/developer.html";
 		} else {
 			model.addAttribute("messaggioErrore", "Questo sviluppatore esiste già");
-			return "formNewDeveloper.html";
+			return "admin/formNewDeveloper.html";
 		}
 	}
-	@GetMapping("/developer/{id}")
+	@GetMapping("/admin/developer/{id}")
 	public String getGame(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("developer", this.developerService.findById(id));
-		return "developer.html";
+		return "admin/developer.html";
 	}
-	@GetMapping("/developers")
+	@GetMapping("/admin/developers")
 	public String showDevelopers(Model model) {
 		model.addAttribute("developers", this.developerService.findAll());
-		return "developers.html";
+		return "admin/developers.html";
+	}
+	@Transactional
+	@GetMapping("/admin/deleteDeveloper/{developerId}")
+	public String deleteDeveloper(@PathVariable("developerId") Long id, Model model) {
+		Developer developer = this.developerService.findById(id);
+		videogameController.deleteAllByDeveloper(developer);
+		developerService.deleteById(id);
+		return "admin/confirmDeleteDeveloper.html";
 	}
 }

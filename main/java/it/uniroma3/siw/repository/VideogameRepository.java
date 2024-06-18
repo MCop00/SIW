@@ -15,7 +15,7 @@ public interface VideogameRepository extends CrudRepository<Videogame,Long> {
 
 	public List<Videogame> findByYear(Integer year);
 
-	boolean existsByTitleAndDeveloper(String title, Developer developer);
+	public List<Videogame> findByDeveloper(Developer developer);
 	
 	@Query(value = "select * "
 			+ "from videogame v "
@@ -24,4 +24,6 @@ public interface VideogameRepository extends CrudRepository<Videogame,Long> {
 			+ "from award_nominations "
 			+ "where award_nominations.nominations_id = :awardId)", nativeQuery = true)
 	public  Videogame[] findVideogamesByAwardTypeAndNotInAward(@Param("awardType") String awardType, @Param("awardId") Long awardId);
+
+	public void deleteAllByDeveloper(Developer developer);
 }

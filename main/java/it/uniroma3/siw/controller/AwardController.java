@@ -21,14 +21,10 @@ public class AwardController {
 	@Autowired AwardService awardService;
 	@Autowired VideogameService videogameService;
 	
-	@GetMapping("/indexAward")
-	public String indexAward() {
-		return "indexAward.html";
-	}
-	@GetMapping("/formNewAward")
+	@GetMapping("/admin/formNewAward")
 	public String formNewAward(Model model) {
 		model.addAttribute("award", new Award());
-		return "formNewAward.html";
+		return "admin/formNewAward.html";
 	}
 	@PostMapping("/awards")
 	public String newAward(@ModelAttribute("award") Award award, Model model) {
@@ -38,18 +34,18 @@ public class AwardController {
 			return "award.html";
 		} else {
 			model.addAttribute("messaggioErrore", "Questo premio esiste già");
-			return "formNewAward.html";
+			return "admin/formNewAward.html";
 		}
 	}
-	@GetMapping("/award/{id}")
+	@GetMapping("/default/award/{id}")
 	public String getAward(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("award", this.awardService.findById(id));
-		return "award.html";
+		return "default/award.html";
 	}
-	@GetMapping("/awards")
+	@GetMapping("/default/awards")
 	public String showAwards(Model model) {
 		model.addAttribute("awards", this.awardService.findAll());
-		return "awards.html";
+		return "default/awards.html";
 	}
 	@GetMapping("/manageAwards")
 	public String manageAwards(Model model) {
@@ -106,6 +102,32 @@ public class AwardController {
 			nominationsToAdd.add(v);
 		}
 		return nominationsToAdd;
+	}
+	@GetMapping("/admin/manageAwardsAdmin")
+	public String manageAwardsAdmin(Model model) {
+		model.addAttribute("awards", this.awardService.findAll());
+		return "admin/manageAwardsAdmin.html";
+	}
+	@GetMapping("/admin/formUpdateAwardAdmin/{id}/{awardType}")
+	public String formUpdateAwardAdmin(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("award", awardService.findById(id));
+		return "admin/formUpdateAwardAdmin.html";
+	}
+	@GetMapping("/addWinner/{id}")
+	public String addWinner(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("award", awardService.findById(id));
+		model.addAttribute("nominations", awardService.findById(id).getNominations());
+		return "admin/winnerToAdd.html";
+	}
+	@GetMapping("/setWinnerToAward/{winnerId}/{awardId}")
+	public String setWinnerToAward(@PathVariable("winnerId") Long winnerId, @PathVariable("awardId") Long awardId, Model model) {
+		Videogame winner = this.videogameService.findById(winnerId);
+		Award award = this.awardService.findById(awardId);
+		award.setWinner(winner);
+		this.awardService.save(award);
+		
+		model.addAttribute("award", award);
+		return "admin/formUpdateAwardAdmin.html";
 	}
 	
 }

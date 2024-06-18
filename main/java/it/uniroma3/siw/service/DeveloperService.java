@@ -23,5 +23,8 @@ public class DeveloperService {
 	public boolean existsByNameCompany(String nameCompany) {
 		return developerRepository.existsByNameCompany(nameCompany);
 	}
+	public void deleteById(Long id) {
+		developerRepository.deleteById(id);
+	}
 	
 }

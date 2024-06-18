@@ -2,25 +2,33 @@
 <html>
 <head>
 	<title>Pagina iniziale</title>
-	
+	<link rel="stylesheet" href="/css/index.css" />
 </head>
 <body>
-	<header>
-		<nav>
-			<ul>
-				<li><a href="#">Gestione Videogiochi</a>
-					<ul>
-						<li><a href="/formNewGame">Aggiungi Gioco</a></li>
-						<li><a href="/games">Giochi nel sistema</a></li>
-						<li><a href="/formSearchGames">Cerca giochi per anno</a></li>
-					</ul>
-				</li>
-				<li><a href="/indexAward">Gestione Premi</a></li>
-			</ul>
-		</nav>
+	<header class="log">
+		<div th:unless="${userDetails}">
+			<a href="/login">Login</a>
+		</div>
 	</header>
-	<div>
-		<a href="/"><img src="/images/logo-games.jpeg" width="30%"/></a>
+
+    <header>  
+      <nav>
+		<ul>
+			<li><a href="#">Gestione Videogiochi</a>
+				<ul>
+					<li><a href="/default/games">Giochi nel sistema</a></li>
+				</ul>
+			</li>
+			<li><a href="">Gestione Premi</a>
+				<ul>
+					<li><a href="/default/awards">Premi nel sistema</a></li>
+				</ul>
+			</li>
+		</ul>
+	  </nav>
+    </header>  
+	<div class="im">
 	</div>
+	
 </body>
 </html>

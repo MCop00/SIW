@@ -10,7 +10,7 @@ insert into videogame (id, title, genre, year, budget, platforms, url_image, dev
 insert into videogame (id, title, genre, year, budget, platforms, url_image, developer_id) values(nextval('videogame_seq'), 'God of War', 'Action', '2018', 'triplaA', '{PlayStation;PC}','https://gmedia.playstation.com/is/image/SIEPDC/god-of-war-hub-thumbnail-desktop-01-en-25jun21?$facebook$', '1');
 insert into videogame (id, title, genre, year, budget, platforms, url_image, developer_id) values(nextval('videogame_seq'), 'Far Cry 3', 'Shooter', '2012', 'triplaA', '{Xbox;PC;PlayStation}','https://gaming-cdn.com/images/products/96/orig-fallback-v1/far-cry-3-pc-gioco-ubisoft-connect-europe-cover.jpg?v=1701181729', '151');
 insert into videogame (id, title, genre, year, budget, platforms, url_image, developer_id) values(nextval('videogame_seq'), 'Prince Of Persia', 'Adventure', '2010', 'triplaA', '{Xbox;PC;PlayStation}','https://sm.ign.com/t/ign_it/screenshot/default/prince-of-persia-le-sabbie-del-tempo-02_npe4.1280.jpg', '151');
-insert into videogame (id, title, genre, year, budget, platforms, url_image, developer_id) values(nextval('videogame_seq'), 'Sekiro', 'Action', '2019', 'triplaA', '{Xbox;PC;PlayStation}','https://upload.wikimedia.org/wikipedia/en/6/60/Sonic_Adventure.PNG', '51');
+insert into videogame (id, title, genre, year, budget, platforms, url_image, developer_id) values(nextval('videogame_seq'), 'Sekiro', 'Action', '2019', 'triplaA', '{Xbox;PC;PlayStation}','https://www.smartworld.it/wp-content/uploads/2019/04/Sekiro-Shadows-Die-Twice-1280x720.jpg', '51');
 
 
 insert into award (id, type, year) values(nextval('award_seq'), 'Platform', '1998');

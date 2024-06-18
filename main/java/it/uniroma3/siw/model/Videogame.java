@@ -29,16 +29,13 @@ public class Videogame {
 	private String budget;
 	private String urlImage;
 	private List<String> platforms;
-	private Float vote;
 	
 	@OneToMany(mappedBy = "winner")
 	private List<Award> awardsWon;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.REMOVE})
 	@JoinColumn(name="developer_id")
 	private Developer developer;
-	@OneToMany(mappedBy="videogame")
-	private List<Review> reviews;
 	
 	public Long getId() {
 		return id;
@@ -82,12 +79,6 @@ public class Videogame {
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
 	}
-	public Float getVote() {
-		return vote;
-	}
-	public void setVote(Float vote) {
-		this.vote = vote;
-	}
 	public List<Award> getAwardsWon() {
 		return awardsWon;
 	}
@@ -99,12 +90,6 @@ public class Videogame {
 	}
 	public void setDeveloper(Developer developer) {
 		this.developer = developer;
-	}
-	public List<Review> getReviews() {
-		return reviews;
-	}
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
 	}
 	@Override
 	public int hashCode() {

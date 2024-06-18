@@ -16,8 +16,7 @@ public class Developer {
 	
 	private String nameCompany;
 	private String logo;
-	/*private Integer startingYear;
-	private String chief;*/
+//	private String chief;
 	
 	@OneToMany(mappedBy="developer")
 	private List<Videogame> videogames;

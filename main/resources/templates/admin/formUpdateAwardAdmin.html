@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>
-		Update Award
+		Update Award Admin
 	</title>
 </head>
 <body>
@@ -18,9 +18,13 @@
 			<div th:each="nomination: ${award.nominations}">
 				<span th:text="${nomination.title} + ' ' + ${nomination.year}"></span>
 			</div>
-			<a th:href="@{'/updateNominations/' + ${award.id} + '/' + ${award.type}}">
-				<button type="button">Modifica</button>
-			</a>
+		</div>
+		<div th:if="${award.winner}">
+			<span>Vincitore: </span><span th:text="${award.winner.title}"></span>
+			<a th:href="@{'/addWinner/' + ${award.id}}">Modifica vincitore</a></span>
+		</div>
+		<div th:unless="${award.winner}">
+			<a th:href="@{'/addWinner/' + ${award.id}}">Scegli vincitore del premio</a>
 		</div>
 	</div>
 	<div th:unless="${award}">Premio non esistente</div>

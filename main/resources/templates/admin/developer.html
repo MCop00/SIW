@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sviluppatore</title>
+	</head>
+<body>
+	<div>
+		<a href="/admin/developers"><img src="/images/logo-games.jpeg" width="30%"/></a>
+	</div>
+	<div th:if="${developer}">
+		<h1 th:text="${developer.nameCompany}">
+		</h1>					
+		</div>		
+		<span><img width="30%" th:src=${developer.logo} /></span>
+		</div>
+	<div th:unless="${developer}">Non esiste</div>
+</body>
+</html>

@@ -13,16 +13,13 @@ import it.uniroma3.siw.model.Developer;
 import it.uniroma3.siw.model.Videogame;
 import it.uniroma3.siw.service.DeveloperService;
 import it.uniroma3.siw.service.VideogameService;
+import jakarta.transaction.Transactional;
 
 @Controller
 public class VideogameController {
 	@Autowired VideogameService videogameService;
 	@Autowired DeveloperService developerService;
 	
-	@GetMapping("/indexGame")
-	public String indexGame() {
-		return "indexGame.html";
-	}
 	@GetMapping("/formNewGame")
 	public String formNewGame(Model model) {
 		model.addAttribute("game", new Videogame());
@@ -34,24 +31,22 @@ public class VideogameController {
 		if(!videogameService.existsByTitleAndYear(game.getTitle(), game.getYear())) {
 			
 			this.videogameService.save(game);
-			
-			
 			model.addAttribute("game", game);
-			return "game.html";
+			return "default/game.html";
 		} else {
 			model.addAttribute("messaggioErrore", "Questo gioco esiste già");
 			return "formNewGame.html";
 		}
 	}
-	@GetMapping("/game/{id}")
+	@GetMapping("/default/game/{id}")
 	public String getGame(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("game", this.videogameService.findById(id));
-		return "game.html";
+		return "default/game.html";
 	}
-	@GetMapping("/games")
+	@GetMapping("/default/games")
 	public String showGames(Model model) {
 		model.addAttribute("games", this.videogameService.findAll());
-		return "games.html";
+		return "default/games.html";
 	}
 	@GetMapping("/formSearchGames")
 	public String formSearchGames() {
@@ -61,5 +56,9 @@ public class VideogameController {
 	public String searchGames(Model model, @RequestParam Integer year) {
 		model.addAttribute("games", this.videogameService.findByYear(year));
 		return "foundGames.html";
+	}
+	@Transactional
+	public void deleteAllByDeveloper(Developer developer) {
+		videogameService.deleteAllByDeveloper(developer);
 	}
 }
